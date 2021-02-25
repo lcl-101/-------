@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栈和队列</title>
+</head>
+<body>
+    <script>
+        //数组中增加元素的三种方法
+        const arr = [1,2];
+        arr.unshift(0);         //前插
+        console.log(arr);
+        const arr1 = [1,2];
+        arr1.push(3);           //后插
+        console.log(arr1);
+        const arr2 = [1,2];
+        arr2.splice(1,0,3);      //插入到指定位置
+        console.log(arr2);
+
+
+
+        //数组删除的三个方法
+        const arr3 = [1,2,3];
+        arr3.shift();
+        console.log(arr3);      //删除头部
+        const arr4 = [1,2,3];
+        arr4.pop();
+        console.log(arr4);      //删除尾部
+        const arr5 = [1,2,3];
+        arr5.splice(1,1);
+        console.log(arr5);      //删除第一个位置,长度为1
+
+        //栈（Stack）——只用 pop 和 push 完成增删的“数组”
+        //后进先出的数据结构
+
+        //初始化栈, 空
+        const stack = [];
+        //入栈过程
+        stack.push('东北大板');
+        stack.push('可爱多');
+        stack.push('巧乐兹');
+        stack.push('兵工厂');
+        stack.push('光明奶转');
+        //出栈
+        while(stack.length){
+            const top = stack[stack.length - 1];
+            console.log("取出的水果是:" + top);
+            //将栈顶元素出栈
+            stack.pop();
+        }
+        console.log(stack);
+
+
+
+
+        //队列（Queue）——只用 push 和 shift 完成增删的“数组”
+        //先进先出的数据结构
+
+        const queue = [];
+        queue.push("小册一姐");
+        queue.push("小册二姐");
+        queue.push("小册三姐");
+        while(queue.length){
+            const top = queue[0];
+            console.log(top + "取餐");
+            //将队头元素取出
+            queue.shift();
+        }
+        console.log(queue);
+
+
+
+
+        //链表
+        //有序列表,（有且仅有一个前驱、有且仅有一个后继）链表中，数据单位的名称叫做“结点”，而结点和结点的分布，在内存中可以是离散的
+        
+        //创建链表
+        function listNode(val) {
+            this.val = val;
+            this.next = null;
+        }
+        const node  = new listNode(1);
+        node.next = new listNode(2);
+        console.log(node);
+        /* 形成链表的数据结构
+            {
+                val:1,
+                next: {
+                    val: 2,
+                    next: null
+                }
+            }
+        */
+        //在结点node1和结点node2中插入node3结点
+        //创建目标结点
+        const node3 = new listNode(3);
+        //把node3的next指向node2(即node1.next)
+        node3.next = node.next;
+        //把node1的next指向node3
+        node.next = node3;
+        console.log(node);
+        /* 形成链表的数据结构
+            {
+                val:1,
+                next: {
+                    val: 3,
+                    next: {
+                        val: 2,
+                        next: null
+                    }
+                }
+            }
+        */
+
+
+        //链表元素的删除
+        //删除node3结点
+        node.next = node3.next;
+        console.log(node);
+        /* 形成链表的数据结构
+            {
+                val:1,
+                next: {
+                    val: 2,
+                    next: null
+                }
+            }
+        */
+
+        //结合上述分析，我们不难得出这样的结论：链表的插入/删除效率较高，而访问效率较低；数组的访问效率较高，而插入效率较低。
+    </script>
+</body>
+</html>
