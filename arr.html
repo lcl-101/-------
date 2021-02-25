@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组</title>
+</head>
+<body>
+    <script>
+        //构造函数创建数组
+        const arr = new Array();
+        console.log(arr);
+        //创建固定长度的数组
+        const arr1 = new Array(7);
+        console.log(arr1);
+        //创建固定长度并且固定值的数组
+        const arr2 = new Array(7).fill(1);
+        console.log(arr2);
+        // for循环
+        for(let i = 0; i < arr2.length; i++){
+            console.log(arr2[i], i);
+        }
+        //forEach
+        arr2.forEach((item, index) => {
+            console.log(item, index);
+        });
+        //map 与forEach区别 会返回一个新的数组
+        const nweArr = arr2.map((item, index) => {
+            console.log(item, index);
+            return item + 1;
+        });
+        console.log(nweArr);
+
+        //二维数组
+        //在数学中，形如这样长方阵列排列的复数或实数集合，被称为“矩阵”。因此二维数组的别名就叫“矩阵”。
+
+        //初始化二位数组
+        const arr3 = new Array(7);
+        const len = arr3.length;
+        for(let i = 0; i < len; i++){
+            arr3[i] = [];
+        }
+        console.log(arr3);
+
+        //二位数组访问
+        const outLen = arr3.length;
+        for(let i = 0; i < outLen; i++){
+            const innerLen = arr3[i].length;
+            for(let j = 0; j < innerLen; j++){
+                console.log(arr3[i][j],i,j);
+            }
+        }
+    </script>
+</body>
+</html>
