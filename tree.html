@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>树</title>
+</head>
+<body>
+    <script>
+        //二叉树的编码实现
+        /*在 JS 中，二叉树使用对象来定义。它的结构分为三块：
+            1.数据域
+            2.左侧子结点（左子树根结点）的引用
+            3.右侧子结点（右子树根结点）的引用
+        */
+
+        // 二叉树结点的构造函数
+        function TreeNode(val) {
+            this.val = val;
+            this.left = this.right = null;
+        }
+        //创建一个二叉树
+        const node = new TreeNode(1);
+        console.log(node);
+    </script>
+</body>
+</html>
