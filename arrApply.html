@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组的应用</title>
+</head>
+<body>
+    <script>
+
+        //##1. Map 的妙用——两数求和问题
+
+        //真题描述： 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标
+        //假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素
+        //解题思路: 几乎所有求和问题都可以转化为求差问题
+        //条件 给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]
+        var nums = [2, 7, 11, 15], target = 9;
+        function twoSum(nums, target){
+            var diffs = {};
+            //缓存数组长度
+            var len = nums.length;
+            for(var i=0;i<len;i++){
+                //判断当前的值 nums[i] 对应的差值是否存在
+                if(diffs[target - nums[i]] != undefined){
+                    //如果差值存在则返回对应的差值下标
+                    return [diffs[target - nums[i]],i];
+                }
+                //如果没有则记录当前的下标
+                diffs[nums[i]] = i;
+            }
+        }
+        console.log(twoSum(nums, target));
+
+        
+        //##2. 强大的双指针法
+        //合并两个有序数组
+        //真题描述：给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+        //说明: 初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。 你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。
+        //示例:
+        /*
+            输入:
+            nums1 = [1,2,3,0,0,0], m = 3
+            nums2 = [2,5,6], n = 3
+            输出: [1,2,2,3,5,6]
+        */
+       var nums1 = [1,2,3,0,0,0],m = 3,nums2 = [2,5,6], n = 3
+        const merge = function(nums1,m,nums2,n){
+            //获取数据的长度
+            let i = m - 1,j = n - 1,k = m + n -1;
+            //同步两个数组,知道某一个循环完毕
+            while( i > 0 && j > 0){
+                if(nums1[i] > nums2[j]){
+                    nums1[k] = nums1[i];
+                    k--;
+                    i--;
+                }else {
+                    nums1[k] = nums2[j];
+                    k--;
+                    j--;
+                }
+            }
+            // nums2 多出来的情况
+            while(j >= 0){
+                nums1[k] = nums2[j];
+                k--;
+                j--;
+            }
+        }
+        merge(nums1,m,nums2,n);
+        console.log(nums1);
+
+        //3. 三数求和问题
+        //真题描述：给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。
+        //给定数组 nums = [-1, 0, 1, 2, -1, -4]， 满足要求的三元组集合为： [ [-1, 0, 1], [-1, -1, 2] ]
+        var nums = [-1, 0, 1, 2, -1, -4];
+        var threeSum = function(nums){
+            //用于存放结果的数组;
+            const res = [];
+            nums = nums.sort((a,b)=> {
+                return a -b;
+            });
+            //缓存数组的长度
+            const len = nums.length;
+            for(let i = 0;i < len; i++){
+                // 左指针
+                let j = i + 1;
+                // 右指针
+                let k = len - 1;
+                // 如果遇到重复的数字，则跳过
+                if(i >0 && nums[i] === nums[i-1]){
+                    continue;
+                }
+                // 循环结束条件
+                while(j < k){
+                    if(nums[i] + nums[j] + nums[k] < 0){            //如果想加结果小于0 说明 左子树比较小
+                        j++;
+                        //处理左指针去重
+                        
+                    }else if(nums[i] + nums[j] + nums[k] > 0){      //如果相加结果大于0说明右子树比较大
+                        k--;
+                        //处理左指针去重
+                    }else {     //输出正确结果
+                        res.push([nums[i],nums[j],nums[k]]);  
+                        
+                        j++;
+                        k--;
+
+                        //左指针去重
+
+                        //右指正去重
+                    }
+                }
+            }
+            //返回结果
+            return res;
+        }
+    </script>
+</body>
+</html>
